@@ -1,6 +1,7 @@
 import App, { Container } from 'next/app';
 import Router from 'next/router';
 import { Global, css } from '@emotion/core';
+import Link from 'next/link';
 import styled from '@emotion/styled';
 import Spinner from '../components/Spinner';
 import ContextProvider from '../context/providers/contextProvider.jsx';
@@ -110,8 +111,15 @@ export default class MyApp extends App {
               <Header>
                 <HeaderContainer>
                   <h1>
-                    <strong>Popmovie!🍿</strong> - The largest movie database
-                    ever
+                    <Link href="/">
+                      <strong style={{ cursor: 'pointer' }}>
+                        Popmovie!
+                        <span aria-label="popcorn" role="img">
+                          🍿
+                        </span>
+                      </strong>
+                    </Link>
+                    - The largest movie database ever
                   </h1>
                   {this.state.loading ? (
                     <Spinner />
