@@ -108,7 +108,7 @@ export default class MyApp extends App {
                   <h1>
                     <strong>Popmovie!🍿</strong> - The largest movie database
                     ever
-                  </h1>{' '}
+                  </h1>
                   {this.state.loading ? (
                     <Spinner />
                   ) : (

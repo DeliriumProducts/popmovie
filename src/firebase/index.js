@@ -48,6 +48,12 @@ class Firebase {
   onAuthStateChanged(cb) {
     return this.auth.onAuthStateChanged(cb);
   }
+
+  getCurrentUser() {
+    if (this.auth) {
+      return this.auth.currentUser;
+    }
+  }
 }
 
 export default new Firebase();
