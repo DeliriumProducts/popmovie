@@ -1,24 +1,58 @@
 import styled from '@emotion/styled';
-import Button from '../components/Button';
-import Link from 'next/link';
-import { keyframes } from '@emotion/core';
-import { THEME_VARIABLES } from '../config/env';
+import MovieCard from '../components/Movie';
 
-import { Card } from 'antd';
+const Container = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
 
-const { Meta } = Card;
+  & > * {
+    margin: 0.7rem;
+  }
+`;
 
 export default () => (
-  <Card
-    hoverable
-    style={{ width: 240 }}
-    cover={
-      <img
-        alt="example"
-        src="https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png"
-      />
-    }
-  >
-    <Meta title="Europe Street beat" description="www.instagram.com" />
-  </Card>
+  <Container>
+    <MovieCard
+      title="Iron Man 3"
+      image="https://s1.thcdn.com/productimg/1600/1600/10808803-5034529881593765.jpg"
+    />
+    <MovieCard
+      title="Iron Man 3"
+      image="https://s1.thcdn.com/productimg/1600/1600/10808803-5034529881593765.jpg"
+    />
+    <MovieCard
+      title="Iron Man 3"
+      image="https://s1.thcdn.com/productimg/1600/1600/10808803-5034529881593765.jpg"
+    />
+    <MovieCard
+      title="Iron Man 3"
+      image="https://s1.thcdn.com/productimg/1600/1600/10808803-5034529881593765.jpg"
+    />
+    <MovieCard
+      title="Iron Man 3"
+      image="https://s1.thcdn.com/productimg/1600/1600/10808803-5034529881593765.jpg"
+    />
+    <MovieCard
+      title="Iron Man 3"
+      image="https://s1.thcdn.com/productimg/1600/1600/10808803-5034529881593765.jpg"
+    />
+    <MovieCard
+      title="Iron Man 3"
+      image="https://s1.thcdn.com/productimg/1600/1600/10808803-5034529881593765.jpg"
+    />
+    <MovieCard
+      title="Iron Man 3"
+      image="https://s1.thcdn.com/productimg/1600/1600/10808803-5034529881593765.jpg"
+    />
+    <MovieCard
+      title="Iron Man 3"
+      image="https://s1.thcdn.com/productimg/1600/1600/10808803-5034529881593765.jpg"
+    />
+    <MovieCard
+      title="Iron Man 3"
+      image="https://s1.thcdn.com/productimg/1600/1600/10808803-5034529881593765.jpg"
+    />
+  </Container>
 );
