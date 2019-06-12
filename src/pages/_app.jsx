@@ -57,6 +57,10 @@ export default class MyApp extends App {
           loading: false,
           user
         });
+      } else {
+        this.setState({
+          loading: false
+        });
       }
     });
   }
