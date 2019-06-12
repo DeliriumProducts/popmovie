@@ -3,9 +3,12 @@ import Router from 'next/router';
 import { Global, css } from '@emotion/core';
 import ContextProvider from '../context/providers/contextProvider.jsx';
 import Head from 'next/head';
+import { Layout } from 'antd';
 import React from 'react';
 import NProgress from 'nprogress';
 import '../assets/nprogress.less';
+
+const { Header, Content, Footer } = Layout;
 
 Router.events.on('routeChangeStart', () => {
   NProgress.start();
@@ -37,12 +40,14 @@ export default class MyApp extends App {
             styles={css`
               body {
                 min-height: 100%;
+                background-color: #282c34;
               }
 
               * {
                 box-sizing: border-box;
                 margin: 0;
                 padding: 0;
+                font-family: 'Josefin Sans';
               }
 
               html {
@@ -55,7 +60,13 @@ export default class MyApp extends App {
             `}
           />
           <Container>
-            <Component {...pageProps} />
+            <Layout>
+              <Header> The largest movie database ever.</Header>
+              <Content>
+                <Component {...pageProps} />
+              </Content>
+              <Footer>Footer</Footer>
+            </Layout>
           </Container>
         </ContextProvider>
       </>
