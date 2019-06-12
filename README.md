@@ -1,4 +1,3 @@
-# frontend-template
+# popmovie!
 
-This is a template for progressive web apps, using Firebase, Ant Design, NextJS &amp; emotion.
-
+🍿The largest movie database! An app with React, Firebase and ant.design!
