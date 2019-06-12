@@ -20,18 +20,16 @@ Router.events.on('routeChangeError', () => NProgress.done());
 
 const HeaderContainer = styled.div`
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-between;
   align-items: center;
-`;
-
-const StyledLayout = styled(Layout)`
-  min-height: 100vh;
 `;
 
 const StyledContent = styled(Content)`
   display: flex;
   justify-content: center;
   align-items: center;
+  min-height: 100vh;
 `;
 
 export default class MyApp extends App {
@@ -65,7 +63,7 @@ export default class MyApp extends App {
                 box-sizing: border-box;
                 margin: 0;
                 padding: 0;
-                font-family: 'Josefin Sans';
+                font-family: 'Nunito';
               }
 
               html {
@@ -78,7 +76,7 @@ export default class MyApp extends App {
             `}
           />
           <Container>
-            <StyledLayout>
+            <Layout>
               <Header>
                 <HeaderContainer>
                   <h1>The largest movie database ever.</h1>{' '}
@@ -91,7 +89,7 @@ export default class MyApp extends App {
                 <Component {...pageProps} />
               </StyledContent>
               <Footer>Delirium Products! ©2019</Footer>
-            </StyledLayout>
+            </Layout>
           </Container>
         </ContextProvider>
       </>
