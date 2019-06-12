@@ -45,14 +45,8 @@ class Firebase {
     return this.auth.signOut();
   }
 
-  isInitialized() {
-    return new Promise(resolve => {
-      this.auth.onAuthStateChanged(resolve);
-    });
-  }
-
-  getCurrentUsername() {
-    return this.auth.currentUser && this.auth.currentUser.displayName;
+  onAuthStateChanged(cb) {
+    return this.auth.onAuthStateChanged(cb);
   }
 }
 

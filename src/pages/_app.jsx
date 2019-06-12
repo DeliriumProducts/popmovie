@@ -2,12 +2,14 @@ import App, { Container } from 'next/app';
 import Router from 'next/router';
 import { Global, css } from '@emotion/core';
 import styled from '@emotion/styled';
+import Spinner from '../components/Spinner';
 import ContextProvider from '../context/providers/contextProvider.jsx';
 import Head from 'next/head';
 import { Layout, Menu } from 'antd';
 import React from 'react';
 import NProgress from 'nprogress';
 import '../assets/nprogress.less';
+import firebase from '../firebase/index';
 
 const { Header, Content, Footer } = Layout;
 const { Item } = Menu;
@@ -42,6 +44,30 @@ export default class MyApp extends App {
 
     return { pageProps };
   }
+
+  state = {
+    user: null,
+    loading: true
+  };
+
+  componentDidMount() {
+    this.unsubscribe = firebase.onAuthStateChanged(user => {
+      if (user) {
+        this.setState({
+          loading: false,
+          user
+        });
+      }
+    });
+  }
+
+  componentWillUnmount() {
+    this.unsubscribe();
+  }
+
+  handleLogin = async () => {
+    await firebase.loginWithPopup('google');
+  };
 
   render() {
     const { Component, pageProps } = this.props;
@@ -80,9 +106,19 @@ export default class MyApp extends App {
               <Header>
                 <HeaderContainer>
                   <h1>The largest movie database ever.</h1>{' '}
-                  <Menu mode="horizontal" theme="dark">
-                    <Item key="login">Login with Google!</Item>
-                  </Menu>
+                  {this.state.loading ? (
+                    <Spinner />
+                  ) : (
+                    <Menu mode="horizontal" theme="dark">
+                      {!this.state.loading && this.state.user ? (
+                        <Item>Hello, {this.state.user.displayName}</Item>
+                      ) : (
+                        <Item key="login" onClick={this.handleLogin}>
+                          Login with Google!
+                        </Item>
+                      )}
+                    </Menu>
+                  )}
                 </HeaderContainer>
               </Header>
               <StyledContent>
