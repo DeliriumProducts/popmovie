@@ -105,7 +105,10 @@ export default class MyApp extends App {
             <Layout>
               <Header>
                 <HeaderContainer>
-                  <h1>The largest movie database ever.</h1>{' '}
+                  <h1>
+                    <strong>Popmovie!🍿</strong> - The largest movie database
+                    ever
+                  </h1>{' '}
                   {this.state.loading ? (
                     <Spinner />
                   ) : (
