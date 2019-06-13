@@ -84,7 +84,7 @@ export default class MyApp extends App {
     return (
       <>
         <Head>
-          <title>Frontend template!</title>
+          <title>Popmovie!</title>
         </Head>
         <ContextProvider>
           <Global
