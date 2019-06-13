@@ -30,10 +30,10 @@ app
       );
     });
 
-    server.get('/hello/:message', (req, res) => {
-      const actualPage = '/hello';
+    server.get('/movie/:movieId', (req, res) => {
+      const actualPage = '/movie';
       const queryParams = Object.assign({}, req.params, {
-        message: req.params.message
+        movieId: req.params.movieId
       });
 
       app.render(req, res, actualPage, queryParams);

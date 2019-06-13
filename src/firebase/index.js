@@ -54,6 +54,13 @@ class Firebase {
       return this.auth.currentUser;
     }
   }
+
+  getMovie(id) {
+    return this.db
+      .collection('movie')
+      .doc(id)
+      .get();
+  }
 }
 
 export default new Firebase();

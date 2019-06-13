@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
 import { Card } from 'antd';
-import { Button, Icon } from 'antd';
+import { Button } from 'antd';
 
 const MovieCard = styled(Card)`
   border: none;
