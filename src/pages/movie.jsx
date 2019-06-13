@@ -10,7 +10,7 @@ const MovieContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  max-width: 80%;
+  max-width: 75%;
   flex-wrap: wrap;
 `;
 
