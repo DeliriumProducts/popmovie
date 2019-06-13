@@ -2,6 +2,7 @@ import React from 'react';
 import styled from '@emotion/styled';
 import MovieCard from '../components/Movie';
 import CreateButton from '../components/CreateButton';
+import firebase from '../firebase';
 import { Modal } from 'antd';
 
 const Container = styled.div`
@@ -17,6 +18,14 @@ const Container = styled.div`
 
 export default () => {
   const [modalVisible, setModalVisible] = React.useState(false);
+  const [user, setUser] = React.useState(null);
+
+  React.useEffect(() => {
+    const unsubscribe = firebase.onAuthStateChanged(setUser);
+
+    return () => unsubscribe();
+  }, []);
+
   return (
     <Container>
       <MovieCard
@@ -59,9 +68,10 @@ export default () => {
         title="Iron Man 3"
         image="https://s1.thcdn.com/productimg/1600/1600/10808803-5034529881593765.jpg"
       />
-      <CreateButton onClick={() => setModalVisible(true)} />
+
+      {user && <CreateButton onClick={() => setModalVisible(true)} />}
       <Modal
-        title="Vertically centered modal dialog"
+        title="Add new movie!"
         centered
         visible={modalVisible}
         onOk={() => setModalVisible(false)}
