@@ -1,5 +1,7 @@
 import { withRouter } from 'next/router';
+import MovieCard from '../components/Movie';
 import { message } from 'antd';
+import Spinner from '../components/Spinner';
 import firebase from '../firebase';
 import React from 'react';
 
@@ -11,7 +13,7 @@ function Movie({ router }) {
     firebase
       .getMovie(router.query.movieId)
       .then(movie => {
-        setMovie(movie);
+        setMovie(movie.data());
         setLoading(false);
       })
       .catch(err => {
@@ -20,9 +22,13 @@ function Movie({ router }) {
       });
   }, [router.query.movieId]);
 
+  if (loading) {
+    return <MovieCard loading />;
+  }
+
   return (
     <div>
-      <pre>{movie && JSON.stringify(movie.data(), null, 2)}</pre>
+      <MovieCard {...movie} />
     </div>
   );
 }

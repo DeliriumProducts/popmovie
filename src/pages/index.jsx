@@ -2,6 +2,7 @@ import React from 'react';
 import styled from '@emotion/styled';
 import MovieCard from '../components/Movie';
 import CreateButton from '../components/CreateButton';
+import Spinner from '../components/Spinner';
 import firebase from '../firebase';
 import { Modal, Form, Input, Icon } from 'antd';
 
@@ -59,20 +60,37 @@ export default () => {
   const [movieState, dispatch] = React.useReducer(stateReducer, initialState);
   const [movieList, setMovieList] = React.useState([]);
   const [user, setUser] = React.useState(null);
+  const [loading, setLoading] = React.useState(true);
 
   React.useEffect(() => {
     const unsubscribe = firebase.onAuthStateChanged(setUser);
     firebase.db.collection('movies').onSnapshot(mList => {
-      setMovieList(mList.docs.map(m => m.data()));
+      setMovieList(
+        mList.docs.map(m => ({
+          ...m.data(),
+          id: m.id
+        }))
+      );
+      setLoading(false);
     });
 
     return () => unsubscribe();
   }, []);
 
+  if (loading) {
+    return (
+      <Container>
+        <Spinner />
+      </Container>
+    );
+  }
+
   return (
     <Container>
       {movieList.length > 0 &&
-        movieList.map(movie => <MovieCard key={movie.id} {...movie} />)}
+        movieList.map(movie => (
+          <MovieCard key={movie.id} {...movie} clickable />
+        ))}
       {user && <CreateButton onClick={() => setModalVisible(true)} />}
       <Modal
         title="Add new movie!"

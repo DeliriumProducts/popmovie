@@ -1,16 +1,31 @@
-@default-bg-color: #282c34;
+// Colors
 @primary-color: #52c41a;
+@default-bg-color: #282c34;
+@disabled-color: #aaa;
+
+// Components
+@component-background: lighten(@default-bg-color, 10%);
+
+// Layout
 @layout-header-background: #282c34;
 @layout-body-background: #282c34;
 @layout-footer-background: #282c34;
+
+// Text
 @heading-color: #ebebeb;
 @text-color: #fff;
 @text-color-secondary: #ddd;
-@disabled-color: #aaa;
-@component-background: lighten(@default-bg-color, 10%);
+
+// Border
 @border-radius-base: 10px;
 @border-radius-sm: 8px;
 @border-color-base: lighten(@default-bg-color, 10%);
 @border-color-split: lighten(@default-bg-color, 15%);
-@card-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+
+// Input
 @input-border-color: darken(@primary-color, 10%);
+
+// Card
+@card-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+@card-actions-background: @component-background;
+
