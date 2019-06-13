@@ -105,29 +105,32 @@ export default () => {
         onCancel={() => setModalVisible(false)}
       >
         <Form layout="vertical">
-          <Form.Item label="Title">
+          <Form.Item>
             <Input
               onChange={e =>
                 dispatch({ type: 'setTitle', payload: e.target.value })
               }
+              placeholder="Name"
               prefix={<Icon type="tag" />}
               value={movieState.title}
             />
           </Form.Item>
-          <Form.Item label="Image">
+          <Form.Item>
             <Input
               onChange={e =>
                 dispatch({ type: 'setImage', payload: e.target.value })
               }
+              placeholder="Image"
               prefix={<Icon type="picture" />}
               value={movieState.image}
             />
           </Form.Item>
-          <Form.Item label="Description">
+          <Form.Item>
             <Input.TextArea
               onChange={e =>
                 dispatch({ type: 'setDescription', payload: e.target.value })
               }
+              placeholder="Description"
               rows={2}
               prefix={<Icon type="info-circle" />}
               value={movieState.description}
