@@ -61,6 +61,13 @@ class Firebase {
       .doc(id)
       .get();
   }
+
+  createMovie(movie) {
+    return this.db
+      .collection('movie')
+      .doc()
+      .set(movie);
+  }
 }
 
 export default new Firebase();
