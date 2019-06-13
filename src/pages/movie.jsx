@@ -22,10 +22,9 @@ function Movie({ router }) {
 
   return (
     <div>
-      <pre>{JSON.stringify(2, null, movie)}</pre>
+      <pre>{movie && JSON.stringify(movie.data(), null, 2)}</pre>
     </div>
   );
 }
 
 export default withRouter(Movie);
-

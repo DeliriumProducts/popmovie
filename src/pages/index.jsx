@@ -16,8 +16,47 @@ const Container = styled.div`
   }
 `;
 
+const initialState = {
+  title: '',
+  image: '',
+  description: ''
+};
+
+const reducerHandlers = {
+  setTitle(state, title) {
+    return {
+      ...state,
+      title
+    };
+  },
+  setImage(state, image) {
+    return {
+      ...state,
+      image
+    };
+  },
+  setDescription(state, description) {
+    return {
+      ...state,
+      description
+    };
+  },
+  resetFields() {
+    return initialState;
+  }
+};
+
+const stateReducer = (state, { type, payload = null }) => {
+  if (reducerHandlers[type]) {
+    return reducerHandlers[type](state, payload);
+  } else {
+    return state;
+  }
+};
+
 export default () => {
   const [modalVisible, setModalVisible] = React.useState(false);
+  const [movieState, dispatch] = React.useReducer(stateReducer, initialState);
   const [user, setUser] = React.useState(null);
 
   React.useEffect(() => {
@@ -74,18 +113,42 @@ export default () => {
         title="Add new movie!"
         centered
         visible={modalVisible}
-        onOk={() => setModalVisible(false)}
+        onOk={async () => {
+          setModalVisible(false);
+          const result = await firebase.createMovie(movieState);
+          console.log(result);
+          dispatch({ type: 'resetFields' });
+        }}
         onCancel={() => setModalVisible(false)}
       >
         <Form layout="vertical">
           <Form.Item label="Title">
-            <Input prefix={<Icon type="tag" />} />
+            <Input
+              onChange={e =>
+                dispatch({ type: 'setTitle', payload: e.target.value })
+              }
+              prefix={<Icon type="tag" />}
+              value={movieState.title}
+            />
           </Form.Item>
           <Form.Item label="Image">
-            <Input prefix={<Icon type="picture" />} />
+            <Input
+              onChange={e =>
+                dispatch({ type: 'setImage', payload: e.target.value })
+              }
+              prefix={<Icon type="picture" />}
+              value={movieState.image}
+            />
           </Form.Item>
           <Form.Item label="Description">
-            <Input.TextArea rows={2} prefix={<Icon type="info-circle" />} />
+            <Input.TextArea
+              onChange={e =>
+                dispatch({ type: 'setDescription', payload: e.target.value })
+              }
+              rows={2}
+              prefix={<Icon type="info-circle" />}
+              value={movieState.description}
+            />
           </Form.Item>
         </Form>
       </Modal>
