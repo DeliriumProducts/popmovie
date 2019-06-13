@@ -57,57 +57,22 @@ const stateReducer = (state, { type, payload = null }) => {
 export default () => {
   const [modalVisible, setModalVisible] = React.useState(false);
   const [movieState, dispatch] = React.useReducer(stateReducer, initialState);
+  const [movieList, setMovieList] = React.useState([]);
   const [user, setUser] = React.useState(null);
 
   React.useEffect(() => {
     const unsubscribe = firebase.onAuthStateChanged(setUser);
+    firebase.db.collection('movies').onSnapshot(mList => {
+      setMovieList(mList.docs.map(m => m.data()));
+    });
 
     return () => unsubscribe();
   }, []);
 
   return (
     <Container>
-      <MovieCard
-        title="John Wick"
-        image="https://images-na.ssl-images-amazon.com/images/I/51-v2kovwfL.jpg"
-      />
-      <MovieCard
-        title="Iron Man 3"
-        image="https://s1.thcdn.com/productimg/1600/1600/10808803-5034529881593765.jpg"
-      />
-      <MovieCard
-        title="Iron Man 3"
-        image="https://s1.thcdn.com/productimg/1600/1600/10808803-5034529881593765.jpg"
-      />
-      <MovieCard
-        title="Iron Man 3"
-        image="https://s1.thcdn.com/productimg/1600/1600/10808803-5034529881593765.jpg"
-      />
-      <MovieCard
-        title="Iron Man 3"
-        image="https://s1.thcdn.com/productimg/1600/1600/10808803-5034529881593765.jpg"
-      />
-      <MovieCard
-        title="Iron Man 3"
-        image="https://s1.thcdn.com/productimg/1600/1600/10808803-5034529881593765.jpg"
-      />
-      <MovieCard
-        title="Iron Man 3"
-        image="https://s1.thcdn.com/productimg/1600/1600/10808803-5034529881593765.jpg"
-      />
-      <MovieCard
-        title="Iron Man 3"
-        image="https://s1.thcdn.com/productimg/1600/1600/10808803-5034529881593765.jpg"
-      />
-      <MovieCard
-        title="Iron Man 3"
-        image="https://s1.thcdn.com/productimg/1600/1600/10808803-5034529881593765.jpg"
-      />
-      <MovieCard
-        title="Iron Man 3"
-        image="https://s1.thcdn.com/productimg/1600/1600/10808803-5034529881593765.jpg"
-      />
-
+      {movieList.length > 0 &&
+        movieList.map(movie => <MovieCard key={movie.id} {...movie} />)}
       {user && <CreateButton onClick={() => setModalVisible(true)} />}
       <Modal
         title="Add new movie!"
