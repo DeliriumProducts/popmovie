@@ -1,9 +1,27 @@
 import { withRouter } from 'next/router';
+import styled from '@emotion/styled';
 import MovieCard from '../components/Movie';
-import { message } from 'antd';
-import Spinner from '../components/Spinner';
+import { message, Typography, Divider, Card } from 'antd';
 import firebase from '../firebase';
 import React from 'react';
+import { THEME_VARIABLES } from '../config/env';
+
+const MovieContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  max-width: 80%;
+  flex-wrap: wrap;
+`;
+
+const MovieDescription = styled(Card)`
+  flex: 2;
+  font-weight: bold;
+  margin: 2rem;
+  height: 100%;
+  border-radius: ${THEME_VARIABLES['@border-radius-base']};
+  padding: 2rem;
+`;
 
 function Movie({ router }) {
   const [movie, setMovie] = React.useState(null);
@@ -23,13 +41,23 @@ function Movie({ router }) {
   }, [router.query.movieId]);
 
   if (loading) {
-    return <MovieCard loading />;
+    return (
+      <MovieContainer>
+        <MovieCard loading />
+        <MovieDescription loading />
+      </MovieContainer>
+    );
   }
 
   return (
-    <div>
+    <MovieContainer>
       <MovieCard {...movie} />
-    </div>
+      <MovieDescription hoverable>
+        <Typography.Title>{movie.title}</Typography.Title>
+        <Divider />
+        <Typography.Paragraph>{movie.description}</Typography.Paragraph>
+      </MovieDescription>
+    </MovieContainer>
   );
 }
 

@@ -112,7 +112,7 @@ export default class MyApp extends App {
           />
           <Container>
             <Layout>
-              <Header>
+              <Header style={{ height: 'auto' }}>
                 <HeaderContainer>
                   <h1>
                     <Link href="/">
