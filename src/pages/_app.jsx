@@ -123,7 +123,7 @@ export default class MyApp extends App {
                         </span>
                       </strong>
                     </Link>
-                    - The largest movie database ever
+                    - The largest movie database ever.
                   </h1>
                   {this.state.loading ? (
                     <Spinner />
