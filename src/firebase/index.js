@@ -57,14 +57,14 @@ class Firebase {
 
   getMovie(id) {
     return this.db
-      .collection('movie')
+      .collection('movies')
       .doc(id)
       .get();
   }
 
   createMovie(movie) {
     return this.db
-      .collection('movie')
+      .collection('movies')
       .doc()
       .set(movie);
   }
