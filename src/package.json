@@ -4,7 +4,8 @@
   "scripts": {
     "dev": "node server.js",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "prod:docker": "npm run build && NODE_ENV=production node server.js"
   },
   "dependencies": {
     "@emotion/core": "^10.0.10",
