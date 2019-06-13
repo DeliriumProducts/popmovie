@@ -12,7 +12,13 @@ export default function Movie({ title, image }) {
     <>
       <MovieCard
         hoverable
-        cover={<img style={{ objectFit: 'cover' }} alt={title} src={image} />}
+        cover={
+          <img
+            style={{ objectFit: 'cover', height: 320 }}
+            alt={title}
+            src={image}
+          />
+        }
       >
         <Card.Meta
           title={

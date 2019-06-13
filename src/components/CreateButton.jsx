@@ -12,7 +12,15 @@ const CreateButtonCard = styled(Card)`
 
 export default function CreateButton(props) {
   return (
-    <div onClick={props.onClick}>
+    <div
+      onClick={props.onClick}
+      style={{
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        width: 250
+      }}
+    >
       <CreateButtonCard hoverable>
         <Icon type="plus" />
       </CreateButtonCard>

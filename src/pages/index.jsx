@@ -3,7 +3,7 @@ import styled from '@emotion/styled';
 import MovieCard from '../components/Movie';
 import CreateButton from '../components/CreateButton';
 import firebase from '../firebase';
-import { Modal } from 'antd';
+import { Modal, Form, Input, Icon } from 'antd';
 
 const Container = styled.div`
   display: flex;
@@ -29,8 +29,8 @@ export default () => {
   return (
     <Container>
       <MovieCard
-        title="Iron Man 3"
-        image="https://s1.thcdn.com/productimg/1600/1600/10808803-5034529881593765.jpg"
+        title="John Wick"
+        image="https://images-na.ssl-images-amazon.com/images/I/51-v2kovwfL.jpg"
       />
       <MovieCard
         title="Iron Man 3"
@@ -77,9 +77,17 @@ export default () => {
         onOk={() => setModalVisible(false)}
         onCancel={() => setModalVisible(false)}
       >
-        <p>some contents...</p>
-        <p>some contents...</p>
-        <p>some contents...</p>
+        <Form layout="vertical">
+          <Form.Item label="Title">
+            <Input prefix={<Icon type="tag" />} />
+          </Form.Item>
+          <Form.Item label="Image">
+            <Input prefix={<Icon type="picture" />} />
+          </Form.Item>
+          <Form.Item label="Description">
+            <Input.TextArea rows={2} prefix={<Icon type="info-circle" />} />
+          </Form.Item>
+        </Form>
       </Modal>
     </Container>
   );
