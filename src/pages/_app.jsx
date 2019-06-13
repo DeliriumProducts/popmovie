@@ -6,14 +6,13 @@ import styled from '@emotion/styled';
 import Spinner from '../components/Spinner';
 import ContextProvider from '../context/providers/contextProvider.jsx';
 import Head from 'next/head';
-import { Layout, Menu } from 'antd';
+import { Layout, Button, Divider } from 'antd';
 import React from 'react';
 import NProgress from 'nprogress';
 import '../assets/nprogress.less';
 import firebase from '../firebase/index';
 
 const { Header, Content, Footer } = Layout;
-const { Item } = Menu;
 
 Router.events.on('routeChangeStart', () => {
   NProgress.start();
@@ -60,6 +59,7 @@ export default class MyApp extends App {
         });
       } else {
         this.setState({
+          user: null,
           loading: false
         });
       }
@@ -72,6 +72,10 @@ export default class MyApp extends App {
 
   handleLogin = async () => {
     await firebase.loginWithPopup('google');
+  };
+
+  handleLogout = async () => {
+    await firebase.logout();
   };
 
   render() {
@@ -123,16 +127,16 @@ export default class MyApp extends App {
                   </h1>
                   {this.state.loading ? (
                     <Spinner />
+                  ) : this.state.user ? (
+                    <div>
+                      Hello, {this.state.user.displayName}
+                      <Divider type="vertical" />
+                      <Button onClick={this.handleLogout}>Logout!</Button>
+                    </div>
                   ) : (
-                    <Menu mode="horizontal" theme="dark">
-                      {!this.state.loading && this.state.user ? (
-                        <Item>Hello, {this.state.user.displayName}</Item>
-                      ) : (
-                        <Item key="login" onClick={this.handleLogin}>
-                          Login with Google!
-                        </Item>
-                      )}
-                    </Menu>
+                    <Button key="login" onClick={this.handleLogin}>
+                      Login with Google!
+                    </Button>
                   )}
                 </HeaderContainer>
               </Header>
